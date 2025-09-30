@@ -4,6 +4,12 @@ class TestResult:
     FAILURE_MSG = 'failed'
     ERROR_MSG = 'error'
 
+    # ANSI escape codes for colors
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    RESET = '\033[0m'
+
     def __init__(self, suite_name=None):
         self.run_count = 0
         self.failures = []
@@ -19,6 +25,16 @@ class TestResult:
         self.errors.append(test)
 
     def summary(self):
-        return f'{self.run_count} {self.RUN_MSG}, ' \
-               f'{str(len(self.failures))} {self.FAILURE_MSG}, ' \
-               f'{str(len(self.errors))} {self.ERROR_MSG}'
+        color = self.RESET
+
+        if len(self.errors) > 0:
+            color = self.RED
+        elif len(self.failures) > 0:
+            color = self.YELLOW
+        else:
+            color = self.GREEN
+
+        run_summary = f'{color}{self.run_count} {self.RUN_MSG}{self.RESET}'
+        failures_summary = f'{color}{len(self.failures)} {self.FAILURE_MSG}{self.RESET}'
+        errors_summary = f'{color}{len(self.errors)} {self.ERROR_MSG}{self.RESET}'
+        return f'{run_summary}, {failures_summary}, {errors_summary}'
