@@ -52,3 +52,4 @@ class TestCase:
         """
         # Esse método será sobrescrito em subclasses
         pass
+

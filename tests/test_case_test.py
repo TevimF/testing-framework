@@ -15,10 +15,9 @@ class TestStub(TestCase):
     def test_error(self):
         raise Exception
 
-
 class TestSpy(TestCase):
     """
-    TestSpy espiona a execução do template method (set_up, test_method, tear_down).
+    TestSpy espiona a execução do modelo method (set_up, test_method, tear_down).
     Então se o teste passa, sabemos que todos os três métodos foram chamados.
     """
     def __init__(self, name):
@@ -84,18 +83,18 @@ class TestCaseTest(TestCase):
 
     def test_summary_coloring(self):
         """Verifica se o resumo começa com o código de cor adequado para cada cenário."""
-        # sucesso -> verde
+        # sucesso → verde
         stub = TestStub('test_success')
         stub.run(self.result)
         assert self.result.summary().startswith(TestResult.GREEN)
 
-        # falha -> amarelo
+        # falha → amarelo
         self.result = TestResult()
         stub = TestStub('test_failure')
         stub.run(self.result)
         assert self.result.summary().startswith(TestResult.YELLOW)
 
-        # erro -> vermelho
+        # erro → vermelho
         self.result = TestResult()
         stub = TestStub('test_error')
         stub.run(self.result)
