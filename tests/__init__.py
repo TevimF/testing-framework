@@ -20,5 +20,7 @@ def run_all_tests():
     runner = TestRunner()
     runner.run(suite)
 
+
+
 if __name__ == '__main__':
     run_all_tests()
